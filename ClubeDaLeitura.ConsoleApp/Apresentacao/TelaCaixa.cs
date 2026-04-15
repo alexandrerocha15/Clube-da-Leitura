@@ -99,10 +99,18 @@ public class TelaCaixa
             if (c == null)
                 continue;
 
-            Console.WriteLine(
-                "{0, -7} | {1, -20} | {2, -10} | {3, -20}",
-                c.Id, c.Eqtiqueta, c.Cor, c.DiasDeEmprestimo
-            );
+
+            // Id e Etiqueta (cor padrão)
+            Console.Write("{0, -7} | {1, -20} | ", c.Id, c.Eqtiqueta);
+
+            // Cor (cor conforme a cor selecionada)
+            Console.ForegroundColor = ObterCorConsole(c.Cor);
+            Console.Write("{0, -10}", c.Cor);
+            Console.ResetColor();
+
+            // Dias (cor padrão)
+            Console.WriteLine(" | {0, -20}", c.DiasDeEmprestimo);
+
         }
 
         if (deveExibirCabecalho)
@@ -169,6 +177,12 @@ public class TelaCaixa
         Console.Write(">");
         Console.ReadLine();
     }
+    private ConsoleColor ObterCorConsole(string cor)
+    {
+        if (cor == "Vermelho") return ConsoleColor.Red;
+        if (cor == "Verde") return ConsoleColor.Green;
+        if (cor == "Azul") return ConsoleColor.Blue;
 
-
+        return ConsoleColor.White;
+    }
 }
