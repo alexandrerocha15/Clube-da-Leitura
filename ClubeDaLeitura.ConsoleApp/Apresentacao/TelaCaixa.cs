@@ -1,4 +1,5 @@
 using System;
+using System.Net.Mime;
 using ClubeDaLeitura.ConsoleApp.Dominio;
 using ClubeDaLeitura.ConsoleApp.Infraestrutura;
 
@@ -37,6 +38,30 @@ public class TelaCaixa
 
         Caixa novaCaixa = ObterDadosCadastrais();
 
+        string[] erros = novaCaixa.Validar();
+
+        if (erros.Length > 0)
+        {
+            Console.WriteLine("---------------------------------");
+
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            for (int i = 0; i < erros.Length; i++)
+            {
+                string erro = erros[i];
+                Console.WriteLine(erro);
+            }
+
+            Console.ResetColor();
+
+            Console.WriteLine("Digite ENTER para continuar...");
+            Console.Write(">");
+            Console.ReadLine();
+
+            Cadastrar();
+            return;
+        }
+
         repositorioCaixa.Cadastrar(novaCaixa);
 
         ExibirMensagem($"O registro \"{novaCaixa.Id}\" foi cadastrado com sucesso!");
@@ -64,6 +89,30 @@ public class TelaCaixa
 
         Caixa novaCaixa = ObterDadosCadastrais();
 
+        string[] erros = novaCaixa.Validar();
+
+        if (erros.Length > 0)
+        {
+            Console.WriteLine("---------------------------------");
+
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            for (int i = 0; i < erros.Length; i++)
+            {
+                string erro = erros[i];
+                Console.WriteLine(erro);
+            }
+
+            Console.ResetColor();
+
+            Console.WriteLine("Digite ENTER para continuar...");
+            Console.Write(">");
+            Console.ReadLine();
+
+            Editar();
+            return;
+        }
+
         bool conseguiuEditar = repositorioCaixa.Editar(idSelecionado, novaCaixa);
 
         if (!conseguiuEditar)
@@ -77,7 +126,30 @@ public class TelaCaixa
 
     public void Excluir()
     {
-        throw new NotImplementedException();
+        ExibirCabecalho("Exclusão de Caixa");
+
+        VisualizarTodos(deveExibirCabecalho: false);
+
+        Console.WriteLine("---------------------------------");
+
+        string? idSelecionado;
+
+        do
+        {
+            Console.Write("Digite o ID do registro que deseja excluir: ");
+            idSelecionado = Console.ReadLine();
+
+            if (!string.IsNullOrWhiteSpace(idSelecionado) && idSelecionado.Length == 7 )
+                break;
+        } while (true);
+
+        bool conseguiuExcluir = repositorioCaixa.Excluir(idSelecionado);
+
+        if (!conseguiuExcluir)
+        {
+            ExibirMensagem("Não foi possivel encontrar o resgistro requesitado.");
+            return;
+        }
     }
 
     public void VisualizarTodos(bool deveExibirCabecalho)
@@ -99,9 +171,8 @@ public class TelaCaixa
             if (c == null)
                 continue;
 
-
             // Id e Etiqueta (cor padrão)
-            Console.Write("{0, -7} | {1, -20} | ", c.Id, c.Eqtiqueta);
+            Console.Write("{0, -7} | {1, -20} | ", c.Id, c.Etiqueta);
 
             // Cor (cor conforme a cor selecionada)
             Console.ForegroundColor = ObterCorConsole(c.Cor);
@@ -110,7 +181,6 @@ public class TelaCaixa
 
             // Dias (cor padrão)
             Console.WriteLine(" | {0, -20}", c.DiasDeEmprestimo);
-
         }
 
         if (deveExibirCabecalho)
