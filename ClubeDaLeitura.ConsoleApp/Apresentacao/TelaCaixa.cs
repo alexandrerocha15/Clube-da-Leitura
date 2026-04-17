@@ -171,23 +171,29 @@ public class TelaCaixa
             if (c == null)
                 continue;
 
-            // Id e Etiqueta (cor padrão)
-            Console.Write("{0, -7} | {1, -20} | ", c.Id, c.Etiqueta);
+            string corSelecionada = c.Cor;
 
-            // Cor (cor conforme a cor selecionada)
-            Console.ForegroundColor = ObterCorConsole(c.Cor);
-            Console.Write("{0, -10}", c.Cor);
-            Console.ResetColor();
+            if (corSelecionada == "Vermelho")
+                Console.ForegroundColor = ConsoleColor.Red;
 
-            // Dias (cor padrão)
-            Console.WriteLine(" | {0, -20}", c.DiasDeEmprestimo);
+            else if (corSelecionada == "Verde")
+                Console.ForegroundColor = ConsoleColor.Green;
+
+            else if (corSelecionada == "Azul")
+                Console.ForegroundColor = ConsoleColor.Blue;
+
+            Console.WriteLine(
+                "{0, -7} | {1, -20} | {2, -10} | {3, -20}",
+                c.Id, c.Etiqueta, c.Cor, c.DiasDeEmprestimo
+            );
         }
+
+        Console.ResetColor();
 
         if (deveExibirCabecalho)
         {
             Console.WriteLine("---------------------------------");
             Console.WriteLine("Digite ENTER para continuar...");
-            Console.Write(">");
             Console.ReadLine();
         }
     }
@@ -246,13 +252,5 @@ public class TelaCaixa
         Console.WriteLine("Digite ENTER para continuar...");
         Console.Write(">");
         Console.ReadLine();
-    }
-    private ConsoleColor ObterCorConsole(string cor)
-    {
-        if (cor == "Vermelho") return ConsoleColor.Red;
-        if (cor == "Verde") return ConsoleColor.Green;
-        if (cor == "Azul") return ConsoleColor.Blue;
-
-        return ConsoleColor.White;
     }
 }
