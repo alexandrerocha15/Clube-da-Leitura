@@ -1,46 +1,57 @@
-﻿while (true)
+﻿namespace ClubeDaLeitura.ConsoleApp;
+
+using ClubeDaLeitura.ConsoleApp.Apresentacao;
+using ClubeDaLeitura.ConsoleApp.Dominio;
+
+public class Program
 {
-    Console.Clear();
-    Console.WriteLine("---------------------------------");
-    Console.WriteLine("Clube da Leitura");
-    Console.WriteLine("---------------------------------");
-    Console.WriteLine("1 - Gerenciar caixas de revistas");
-    Console.WriteLine("2 - Gerenciar revistas");
-    Console.WriteLine("3 - Gerenciar amigos");
-    Console.WriteLine("4 - Gerenciar empréstimos");
-    Console.WriteLine("S - Sair");
-    Console.WriteLine("---------------------------------");
-    Console.Write("> ");
-    string? opcaoMenuPrincipal = Console.ReadLine()?.ToUpper();
-
-    if (opcaoMenuPrincipal == "S")
+    public static void Main(string[] arg)
     {
-        Console.Clear();
-        break;
-    }
-
-    while (true)
-    {
-        string? opcaoMenuInterno = string.Empty;
-
-        if (opcaoMenuPrincipal == "1")
+        while (true)
         {
+            Console.Clear();
+            Console.WriteLine("---------------------------------");
+            Console.WriteLine("Clube da Leitura");
+            Console.WriteLine("---------------------------------");
+            Console.WriteLine("1 - Gerenciar caixas de revistas");
+            Console.WriteLine("2 - Gerenciar revistas");
+            Console.WriteLine("3 - Gerenciar amigos");
+            Console.WriteLine("4 - Gerenciar empréstimos");
+            Console.WriteLine("S - Sair");
+            Console.WriteLine("---------------------------------");
+            Console.Write("> ");
+            string? opcaoMenuPrincipal = Console.ReadLine()?.ToUpper();
 
-        }
+            if (opcaoMenuPrincipal == "S")
+            {
+                Console.Clear();
+                break;
+            }
 
-        else if (opcaoMenuPrincipal == "2")
-        {
+            while (true)
+            {
+                string? opcaoMenuInterno = string.Empty;
 
-        }
+                if (opcaoMenuPrincipal == "1")
+                {
+                    TelaCaixa.opcaoMenuPrincipal();
+                }
 
-        else if (opcaoMenuPrincipal == "3")
-        {
+                else if (opcaoMenuPrincipal == "2")
+                {
 
-        }
+                }
 
-        else if (opcaoMenuPrincipal == "4")
-        {
+                else if (opcaoMenuPrincipal == "3")
+                {
 
+                }
+
+                else if (opcaoMenuPrincipal == "4")
+                {
+
+                }
+            }
         }
     }
 }
