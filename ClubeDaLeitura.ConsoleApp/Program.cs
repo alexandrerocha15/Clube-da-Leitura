@@ -7,10 +7,14 @@ RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
 RepositorioRevista repositorioRevista = new RepositorioRevista();
 
 TelaCaixa telaCaixa = new TelaCaixa(repositorioCaixa);
-TelaRevista telaRevista = new TelaRevista(repositorioRevista, repositorioCaixa);
 
-Caixa caixa = new Caixa("Lançamentos", "Vermelho", 3);
+TelaRevista telaRevista = new TelaRevista(repositorioRevista, repositorioCaixa);
+Caixa caixa = new Caixa("Lançamentos", "Verde", 3);
 repositorioCaixa.Cadastrar(caixa);
+
+Revista revista = new Revista("Ação e Aventura", 32, 2013, caixa);
+repositorioRevista.Cadastrar(revista);
+
 
 while (true)
 {
