@@ -6,17 +6,16 @@ emprestar para os amigos. Assim foi criado o Clube da Leitura.
 Mas para não perder nenhuma revista, seu pai contratou os alunos da Academia do
 Programador para fazer uma aplicação que cadastra as revistas e controla os
 empréstimos.
-
 ## 1. Módulo de Caixas
-
-**Requisitos Funcionais:**
+```
+Requisitos Funcionais
 
 - O sistema deve permitir cadastrar novas caixas
 - O sistema deve permitir editar caixas existentes
 - O sistema deve permitir excluir caixas
 - O sistema deve permitir visualizar todas as caixas
 
-**Regras de Negócio:**
+Regras de Negócio:
 
 - Campos obrigatórios:
 - Etiqueta (texto único, máximo 50 caracteres)
@@ -25,17 +24,17 @@ empréstimos.
 - Não pode haver etiquetas duplicadas
 - Não permitir excluir uma caixa caso tenha revistas vinculadas
 - Cada caixa define o prazo máximo para empréstimo de suas revistas
-
+```
 ## 2. Módulo de Revistas
-
-**Requisitos Funcionais:**
+```
+Requisitos Funcionais:
 
 - O sistema deve permitir cadastrar novas revistas
 - O sistema deve permitir editar revistas existentes
 - O sistema deve permitir excluir revistas
 - O sistema deve permitir visualizar todas as revistas
 
-**Regras de Negócio:**
+Regras de Negócio:
 
 - Campos obrigatórios:
   - Título (2-100 caracteres)
@@ -43,39 +42,39 @@ empréstimos.
   - Ano de publicação (data válida)
   - Caixa (seleção obrigatória)
 - Não pode haver revistas com mesmo título e edição
-
+```
 ## 3. Módulo de Amigos
-
-**Requisitos Funcionais**
+```
+Requisitos Funcionais
 
 - O sistema deve permitir a inserção de novos amigos
 - O sistema deve permitir a edição de amigos já cadastrados
 - O sistema deve permitir excluir amigos já cadastrados
 - O sistema deve permitir visualizar amigos cadastrados
 
-**Regras de Negócio:**
+Regras de Negócio:
 
 - Campos obrigatórios:
   - Nome (mínimo 3 caracteres, máximo 100)
   - Nome do responsável (mínimo 3 caracteres, máximo 100)
   - Telefone (formato validado: 10-11 dígitos)
   - Não pode haver amigos com o mesmo nome e telefone
-
+```
 ## 4. Módulo de Empréstimos
 
-**Requisitos Funcionais:**
+Requisitos Funcionais:
 
 - O sistema deve permitir registrar novos empréstimos
 - O sistema deve permitir registrar devoluções
 - O sistema deve permitir visualizar empréstimos abertos e fechados
 
-**Refatorações:**
-
-**Revistas:**
+## Refatorações
+```
+Revistas:
 
 - O sistema deve armazenar e mostrar o status atual das revistas cadastradas (disponível/emprestada/reservada)
 
-**Amigos:**
+Amigos:
 
 - O sistema deve permitir visualizar os empréstimos de amigos específicos
 - Não permitir excluir um amigo caso tenha empréstimos vinculados
@@ -90,7 +89,7 @@ empréstimos.
 - Empréstimos atrasados devem ser destacados visualmente
 - A data de devolução é calculada automaticamente (data empréstimo + dias da
   caixa)
-
+```
 ## Como utilizar
 
 1. Clone o repositório ou baixe o código fonte.
