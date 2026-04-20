@@ -10,16 +10,17 @@ RepositorioAmigo repositorioAmigo = new RepositorioAmigo();
 
 
 TelaCaixa telaCaixa = new TelaCaixa(repositorioCaixa);
-
 TelaRevista telaRevista = new TelaRevista(repositorioRevista, repositorioCaixa);
+TelaAmigo telaAmigo = new TelaAmigo(repositorioAmigo);
+
 Caixa caixa = new Caixa("Lançamentos", "Verde", 3);
 repositorioCaixa.Cadastrar(caixa);
 
 Revista revista = new Revista("Ação e Aventura", 32, 2013, caixa);
 repositorioRevista.Cadastrar(revista);
 
-TelaAmigo telaAmigo = new TelaAmigo();
 Amigo amigo = new Amigo("Bernardo", "Tadeu", "49 914992103");
+repositorioAmigo.Cadastrar(amigo);
 
 while (true)
 {

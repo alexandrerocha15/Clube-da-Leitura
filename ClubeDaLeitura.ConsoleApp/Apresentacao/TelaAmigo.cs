@@ -1,62 +1,67 @@
 using System;
 using ClubeDaLeitura.ConsoleApp.Dominio;
+using ClubeDaLeitura.ConsoleApp.Dominio.Base;
 using ClubeDaLeitura.ConsoleApp.Infraestrutura;
 
 namespace ClubeDaLeitura.ConsoleApp.Apresentacao;
 
-public class TelaAmigo
+public class TelaAmigo : TelaBase
 {
     private RepositorioAmigo repositorioAmigo;
 
-    internal void Cadastrar()
+    public TelaAmigo(RepositorioAmigo repositorioAmigo) : base("Amigo", repositorioAmigo)
     {
-        throw new NotImplementedException();
+
     }
 
-    internal void Editar()
+
+    public override void VisualizarTodos(bool deveExibirCabecalho)
     {
-        throw new NotImplementedException();
+        if (deveExibirCabecalho)
+            ExibirCabecalho("Visualização de Amigos");
+
+        Console.WriteLine(
+            "{0, -7} | {1, -15} | {2, -15} | {3, -13}",
+            "Id", "Nome", "Responsável", "Telefone"
+        );
+
+        EntidadeBase?[] amigos = repositorioAmigo.SelecionarTodas();
+
+        for (int i = 0; i < amigos.Length; i++)
+        {
+            Amigo? a = (Amigo?)amigos[i];
+
+            if (a == null)
+                continue;
+
+            Console.WriteLine(
+                "{0, -7} | {1, -15} | {2, -15} | {3, -13}",
+                a.Id, a.Nome, a.NomeResponsavel, a.NumeroTelefone
+            );
+        }
+
+        Console.ResetColor();
+
+        if (deveExibirCabecalho)
+        {
+            Console.WriteLine("---------------------------------");
+            Console.WriteLine("Digite ENTER para continuar...");
+            Console.ReadLine();
+        }
     }
 
-    internal void Excluir()
-    {
-        throw new NotImplementedException();
-    }
-
-    internal void VisualizarTodos(bool deveExibirCabecalho)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void ObterDadosCadastrais()
+    protected override EntidadeBase ObterDadosCadastrais()
     {
         Console.Write("Digite o nome do amigo: ");
-        string? nomeAmigo = Console.ReadLine();
+        string nome = Console.ReadLine() ?? string.Empty;
 
         Console.Write("Digite o nome do reponsável: ");
-        string? nomeResponsavel = Console.ReadLine();
+        string nomeResponsavel = Console.ReadLine() ?? string.Empty;
 
         Console.Write("Digite o número de Telefone: ");
-        string? numeroTelefone = Console.ReadLine();
+        string numeroTelefone = Console.ReadLine() ?? string.Empty;
 
-       
-    }
-    protected void ExibirCabecalho(string titulo)
-    {
-        // Console.Clear();
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine("Gestão de Amigos");
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine(titulo);
-        Console.WriteLine("---------------------------------");
+        return new Amigo(nome, nomeResponsavel, numeroTelefone);
     }
 
-    protected void ExibirMensagem(string mensagem)
-    {
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine(mensagem);
-        Console.WriteLine("---------------------------------");
-        Console.Write("Digite ENTER para continuar...");
-        Console.ReadLine();
-    }
 }
