@@ -1,5 +1,7 @@
 using System;
 using ClubeDaLeitura.ConsoleApp.Apresentacao;
+using ClubeDaLeitura.ConsoleApp.Infraestrutura;
+using Microsoft.Win32;
 
 namespace ClubeDaLeitura.ConsoleApp.Dominio.Base;
 
@@ -23,7 +25,6 @@ public class Amigo : EntidadeBase
         NomeResponsavel = amigoAtualizado.NomeResponsavel;
         NumeroTelefone = amigoAtualizado.NumeroTelefone;
     }
-
     public override string[] Validar()
     {
         string erros = string.Empty;
@@ -43,6 +44,9 @@ public class Amigo : EntidadeBase
 
         string numTelefone = NumeroTelefone.Replace(" ", "").Replace("-", "");
 
+        if (ValidarTelefone())
+            erros += "O \"Número do Telefone\" ja está cadastrado no sistema;";
+
         int contadorDigitos = 0;
         for (int i = 0; i < numTelefone.Length; i++)
         {
@@ -59,4 +63,10 @@ public class Amigo : EntidadeBase
 
         return erros.Split(';', StringSplitOptions.RemoveEmptyEntries);
     }
+    public bool ValidarTelefone()
+    {
+        
+        return false;
+    }
+
 }

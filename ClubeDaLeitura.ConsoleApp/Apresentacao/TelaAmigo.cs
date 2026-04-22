@@ -11,7 +11,7 @@ public class TelaAmigo : TelaBase
 
     public TelaAmigo(RepositorioAmigo repositorioAmigo) : base("Amigo", repositorioAmigo)
     {
-
+        this.repositorioAmigo = repositorioAmigo;
     }
 
 
@@ -21,7 +21,7 @@ public class TelaAmigo : TelaBase
             ExibirCabecalho("Visualização de Amigos");
 
         Console.WriteLine(
-            "{0, -7} | {1, -15} | {2, -15} | {3, -13}",
+            "{0, -7} | {1, -25} | {2, -15} | {3, -13}",
             "Id", "Nome", "Responsável", "Telefone"
         );
 
@@ -35,7 +35,7 @@ public class TelaAmigo : TelaBase
                 continue;
 
             Console.WriteLine(
-                "{0, -7} | {1, -15} | {2, -15} | {3, -13}",
+                "{0, -7} | {1, -25} | {2, -15} | {3, -13}",
                 a.Id, a.Nome, a.NomeResponsavel, a.NumeroTelefone
             );
         }
@@ -63,5 +63,6 @@ public class TelaAmigo : TelaBase
 
         return new Amigo(nome, nomeResponsavel, numeroTelefone);
     }
+    
 
 }
