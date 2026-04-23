@@ -10,6 +10,7 @@ public class Amigo : EntidadeBase
     public string Nome { get; set; } = string.Empty;
     public string NomeResponsavel { get; set; } = string.Empty;
     public string NumeroTelefone { get; set; } = string.Empty;
+    public Emprestimo[] Emprestimos = new Emprestimo[100];
 
     public Amigo(string nome, string nomeResponsavel, string numeroTelefone)
     {
@@ -69,4 +70,15 @@ public class Amigo : EntidadeBase
         return false;
     }
 
+    public void AdicionarEmprestimo(Emprestimo emprestimo)
+    {
+        for (int i = 0; i < Emprestimos.Length; i++)
+        {
+            Emprestimo e = Emprestimos[i];
+
+            if (e == null)
+                Emprestimos[i] = emprestimo;
+                break;
+        }
+    }
 }

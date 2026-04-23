@@ -60,6 +60,7 @@ public class TelaRevista : TelaBase
         {
             Console.WriteLine("---------------------------------");
             Console.WriteLine("Digite ENTER para continuar...");
+            Console.Write(">");
             Console.ReadLine();
         }
     }
