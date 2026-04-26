@@ -1,11 +1,10 @@
-using System;
+using ClubeDaLeitura.ConsoleApp.Apresentacao.Base;
 using ClubeDaLeitura.ConsoleApp.Dominio;
-using ClubeDaLeitura.ConsoleApp.Dominio.Base;
 using ClubeDaLeitura.ConsoleApp.Infraestrutura;
 
 namespace ClubeDaLeitura.ConsoleApp.Apresentacao;
 
-public abstract class TelaBase
+public abstract class TelaBase : ITela
 {
 
     public string nomeEntidade = string.Empty;
@@ -17,6 +16,31 @@ public abstract class TelaBase
         this.repositorio = repositorio;
     }
 
+    public string? ObterOpcaoMenu()
+    {
+        string nomeMinusculo = nomeEntidade.ToLower();
+
+        Console.Clear();
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine($"Gestão de {nomeEntidade}");
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine($"1 - Cadastrar {nomeMinusculo}");
+        Console.WriteLine($"2 - Editar {nomeMinusculo}");
+        Console.WriteLine($"3 - Excluir {nomeMinusculo}");
+        Console.WriteLine($"4 - Visualizar {nomeMinusculo}s");
+        Console.WriteLine("S - Voltar para o início");
+        Console.WriteLine("---------------------------------");
+        Console.Write("> ");
+        string? opcaoMenu = Console.ReadLine()?.ToUpper();
+
+        return opcaoMenu;
+    }
+
+    protected virtual bool ValidarInformacoesDuplicadas(EntidadeBase entidade)
+    {
+        return true;
+    }
+
     public void Cadastrar()
     {
         ExibirCabecalho($"Cadastrar {nomeEntidade}");
@@ -24,6 +48,14 @@ public abstract class TelaBase
         EntidadeBase novaEntidade = ObterDadosCadastrais();
 
         string[] erros = novaEntidade.Validar();
+
+        // if (!ValidarInformacoesDuplicadas())
+        // {
+        //     Console.WriteLine("Digite ENTER para continuar...");
+        //     Console.Write(">");
+        //     Console.ReadLine();
+        //     return;
+        // }
 
         if (erros.Length > 0)
         {
@@ -134,31 +166,13 @@ public abstract class TelaBase
             ExibirMensagem("Não foi possivel encontrar o resgistro requesitado.");
             return;
         }
-    }
 
+        ExibirMensagem($"O registro \"{idSelecionado}\" foi excluído com sucesso.");
+    }
     public abstract void VisualizarTodos(bool deveExibirCabecalho);
-    public string? ObterOpcaoMenu()
-    {
-        string nomeMinusculo = nomeEntidade.ToLower();
-
-        // Console.Clear();
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine($"Gestão de {nomeEntidade}");
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine($"1 - Cadastrar {nomeMinusculo}");
-        Console.WriteLine($"2 - Editar {nomeMinusculo}");
-        Console.WriteLine($"3 - Excluir {nomeMinusculo}");
-        Console.WriteLine($"4 - Visualizar {nomeMinusculo}s");
-        Console.WriteLine("S - Sair");
-        Console.WriteLine("---------------------------------");
-        Console.Write("> ");
-        string? opcaoMenu = Console.ReadLine()?.ToUpper();
-
-        return opcaoMenu;
-    }
     protected void ExibirCabecalho(string titulo)
     {
-        // Console.Clear();
+        Console.Clear();
         Console.WriteLine("---------------------------------");
         Console.WriteLine("Gestão de Caixas");
         Console.WriteLine("---------------------------------");

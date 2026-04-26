@@ -63,6 +63,16 @@ public class TelaAmigo : TelaBase
 
         return new Amigo(nome, nomeResponsavel, numeroTelefone);
     }
-    
+
+    /*protected override bool ValidarInformacoesDuplicadas(EntidadeBase entidade)
+    {
+        Amigo amigo = (Amigo)entidade;
+
+        Amigo[] amigos = repositorioAmigo.SelecionarTodas();
+        
+        amigo.ValidarTelefone();
+        return base.ValidarInformacoesDuplicadas();
+    }
+    */
 
 }

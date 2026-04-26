@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using ClubeDaLeitura.ConsoleApp.Apresentacao;
 using ClubeDaLeitura.ConsoleApp.Infraestrutura;
 using Microsoft.Win32;
@@ -45,9 +46,6 @@ public class Amigo : EntidadeBase
 
         string numTelefone = NumeroTelefone.Replace(" ", "").Replace("-", "");
 
-        if (ValidarTelefone())
-            erros += "O \"Número do Telefone\" ja está cadastrado no sistema;";
-
         int contadorDigitos = 0;
         for (int i = 0; i < numTelefone.Length; i++)
         {
@@ -59,15 +57,24 @@ public class Amigo : EntidadeBase
                 break;
             }
         }
-        if (NumeroTelefone.Length < 10 || NumeroTelefone.Length > 11)
+        if (numTelefone.Length != 10 && numTelefone.Length != 11)
             erros += "O campo \"Número do Telefone\" deve conter 10 ou 11 dígitos;";
 
         return erros.Split(';', StringSplitOptions.RemoveEmptyEntries);
     }
-    public bool ValidarTelefone()
+    public bool ValidarTelefone(Amigo[] amigos)
     {
-        
-        return false;
+        for (int i = 0; i < amigos.Length;i++)
+        {
+            if (amigos[i] ==null)
+                continue;
+
+            if (amigos[i].NumeroTelefone == NumeroTelefone)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void AdicionarEmprestimo(Emprestimo emprestimo)

@@ -1,10 +1,11 @@
+using ClubeDaLeitura.ConsoleApp.Apresentacao.Base;
 using ClubeDaLeitura.ConsoleApp.Dominio;
 using ClubeDaLeitura.ConsoleApp.Dominio.Base;
 using ClubeDaLeitura.ConsoleApp.Infraestrutura;
 
 namespace ClubeDaLeitura.ConsoleApp.Apresentacao;
 
-public class TelaEmprestimo
+public class TelaEmprestimo : ITela
 {
     private RepositorioEmprestimo repositorioEmprestimo;
     private RepositorioRevista repositorioRevista;
@@ -21,11 +22,10 @@ public class TelaEmprestimo
         this.repositorioRevista = repositorioRevista;
         this.repositorioAmigo = repositorioAmigo;
     }
-
-
+    
     public string? ObterOpcaoMenu()
     {
-        // Console.Clear();
+        Console.Clear();
         Console.WriteLine("---------------------------------");
         Console.WriteLine($"Gestão de Emprestimos");
         Console.WriteLine("---------------------------------");
@@ -40,10 +40,9 @@ public class TelaEmprestimo
         return opcaoMenu;
     }
 
-
     public void Abrir()
     {
-        ExibirCabecalho("Abertura de Empr´stimo");
+        ExibirCabecalho("Abertura de Empréstimo");
 
         Emprestimo emprestimo = ObterDadosCadastrais();
 
@@ -182,7 +181,6 @@ public class TelaEmprestimo
             Console.WriteLine();
         }
 
-
         if (deveExibirCabecalho)
         {
             Console.WriteLine("---------------------------------");
@@ -298,7 +296,7 @@ public class TelaEmprestimo
 
     private void ExibirCabecalho(string titulo)
     {
-        // Console.Clear();
+        Console.Clear();
         Console.WriteLine("---------------------------------");
         Console.WriteLine($"Gestão de Empréstimos");
         Console.WriteLine("---------------------------------");
@@ -314,9 +312,4 @@ public class TelaEmprestimo
         Console.Write("Digite ENTER para continuar...");
         Console.ReadLine();
     }
-
-
-
-
-
 }
